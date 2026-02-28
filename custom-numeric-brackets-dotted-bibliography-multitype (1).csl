@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0.1" class="in-text" default-locale="en-US">
+  <!-- This style was edited with the Visual CSL Editor (https://editor.citationstyles.org/codeEditor/) -->
+  <info>
+    <title>Custom Numeric Brackets + Dotted Bibliography (Multi-type)</title>
+    <id>http://www.zotero.org/styles/custom-numeric-brackets-dotted-bibliography-multitype</id>
+    <link href="http://www.zotero.org/styles/custom-numeric-brackets-dotted-bibliography-multitype" rel="self"/>
+    <category citation-format="numeric"/>
+    <updated>2026-02-28T11:41:45+00:00</updated>
+  </info>
+  <citation collapse="citation-number">
+    <layout prefix="[" suffix="]" delimiter=",">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+  <macro name="authors">
+    <names variable="author" delimiter="; ">
+      <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter="; "/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+  <macro name="editors">
+    <names variable="editor" delimiter=", ">
+      <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter="" and="text"/>
+    </names>
+  </macro>
+  <macro name="year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+  <macro name="journal-italic">
+    <choose>
+      <if variable="container-title-short">
+        <text variable="container-title-short" font-style="italic"/>
+      </if>
+      <else>
+        <text variable="container-title" font-style="italic"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="book-title-italic">
+    <text variable="container-title" font-style="italic"/>
+  </macro>
+  <macro name="title">
+    <text variable="title"/>
+  </macro>
+  <macro name="edition-ed">
+    <choose>
+      <if variable="edition" is-numeric="edition">
+        <number variable="edition" form="ordinal"/>
+        <text value=" ed."/>
+      </if>
+      <else-if variable="edition">
+        <text variable="edition"/>
+      </else-if>
+    </choose>
+  </macro>
+  <macro name="publisher-block">
+    <text variable="publisher" suffix=": "/>
+    <text variable="publisher-place"/>
+  </macro>
+  <macro name="volume-word">
+    <choose>
+      <if variable="volume">
+        <text value="Volume "/>
+        <text variable="volume"/>
+      </if>
+    </choose>
+  </macro>
+  <macro name="pp-pages">
+    <choose>
+      <if variable="page">
+        <text value="pp. "/>
+        <text variable="page"/>
+      </if>
+    </choose>
+  </macro>
+  <macro name="accessed-on">
+    <choose>
+      <if variable="accessed">
+        <text value="(accessed on "/>
+        <date variable="accessed">
+          <date-part name="day" suffix=" "/>
+          <date-part name="month" form="long" suffix=" "/>
+          <date-part name="year"/>
+        </date>
+        <text value=")"/>
+      </if>
+    </choose>
+  </macro>
+  <macro name="event-date-dmy">
+    <choose>
+      <if variable="event-date">
+        <date variable="event-date">
+          <date-part name="day" suffix=" "/>
+          <date-part name="month" form="long" suffix=" "/>
+          <date-part name="year"/>
+        </date>
+      </if>
+      <else-if variable="issued">
+        <date variable="issued">
+          <date-part name="day" suffix=" "/>
+          <date-part name="month" form="long" suffix=" "/>
+          <date-part name="year"/>
+        </date>
+      </else-if>
+    </choose>
+  </macro>
+  <bibliography hanging-indent="false">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout>
+      <text variable="citation-number" suffix=". "/>
+      <choose>
+        <if type="article-journal">
+          <text macro="authors" suffix=". "/>
+          <text macro="title" suffix=". "/>
+          <text macro="journal-italic" suffix=" "/>
+          <text macro="year" suffix=", "/>
+          <text variable="volume" suffix=", "/>
+          <text variable="page" suffix="."/>
+        </if>
+        <else-if type="chapter">
+          <text macro="authors" suffix=". "/>
+          <text macro="title" suffix=". "/>
+          <text value="In "/>
+          <text macro="book-title-italic" suffix=", "/>
+          <text macro="edition-ed" suffix="; "/>
+          <choose>
+            <if variable="editor">
+              <text macro="editors" suffix=", "/>
+              <text value="Eds.; "/>
+            </if>
+          </choose>
+          <text macro="publisher-block" suffix=", "/>
+          <text macro="year" suffix="; "/>
+          <text macro="volume-word" suffix=", "/>
+          <text macro="pp-pages" suffix="."/>
+        </else-if>
+        <else-if type="book">
+          <text macro="authors" suffix=". "/>
+          <text variable="title" font-style="italic" suffix=", "/>
+          <text macro="edition-ed" suffix="; "/>
+          <text macro="publisher-block" suffix=", "/>
+          <text macro="year" suffix="; "/>
+          <text macro="pp-pages" suffix="."/>
+        </else-if>
+        <else-if type="manuscript">
+          <text macro="authors" suffix=". "/>
+          <text macro="title" suffix=". "/>
+          <text macro="journal-italic" suffix=" "/>
+          <text macro="year" suffix=", "/>
+          <text variable="status" font-style="italic" suffix="."/>
+        </else-if>
+        <else-if type="personal_communication">
+          <text macro="authors" suffix=". "/>
+          <text value="Personal communication, "/>
+          <text macro="year" suffix="."/>
+        </else-if>
+        <else-if type="paper-conference">
+          <text macro="authors" suffix=". "/>
+          <text macro="title" suffix=". "/>
+          <text value="In Proceedings of the "/>
+          <text variable="container-title" suffix=", "/>
+          <text variable="event-place" suffix=", "/>
+          <choose>
+            <if variable="jurisdiction">
+              <text variable="jurisdiction" suffix=", "/>
+            </if>
+            <else-if variable="publisher-place">
+              <text variable="publisher-place" suffix=", "/>
+            </else-if>
+          </choose>
+          <text value="Date of Conference ("/>
+          <text macro="event-date-dmy"/>
+          <text value=")."/>
+        </else-if>
+        <else-if type="thesis">
+          <text macro="authors" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text variable="genre" suffix=", "/>
+          <text variable="publisher" suffix=", "/>
+          <text variable="publisher-place" suffix=", "/>
+          <text value="Date of Completion. "/>
+        </else-if>
+        <else-if type="webpage">
+          <text macro="title" suffix=". "/>
+          <text value="Available online: "/>
+          <text variable="URL" suffix=" "/>
+          <text macro="accessed-on" suffix="."/>
+        </else-if>
+        <else>
+          <text macro="authors" suffix=". "/>
+          <text macro="title" suffix=". "/>
+          <text macro="year" suffix="."/>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
